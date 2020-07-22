@@ -1,7 +1,7 @@
 class RecipeCard
     @@all = []
 
-    attr_accessor :user, :recipe, :date, :rating
+    attr_accessor :user, :recipe, :date, :rating 
     
     def initialize(user, recipe, date, rating)
         @user = user

@@ -2,7 +2,8 @@ class Recipe
 
     @@all = []
 
-    def initialize 
+    def initialize(name)
+        @name = name 
         @@all << self
     end
 
@@ -58,4 +59,20 @@ class Recipe
             ingredient.allergen? == true
         end
     end
+    # `Recipe.most_popular`
+    # should return the recipe instance with the highest number of users 
+    # (the recipe that has the most recipe cards)
+    # arr.each_with_object(Hash.new(0)) { |n,h| h[n] += 1 }.values.max
+
+    def self.most_popular
+        self.all.max_by do |recipe|
+        RecipeCard.all.select do |card|
+            card.recipe == recipe
+        end.count
+    end
+end
+    
+    
+
+    
 end

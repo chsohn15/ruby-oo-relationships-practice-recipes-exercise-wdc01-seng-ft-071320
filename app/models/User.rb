@@ -17,11 +17,7 @@ class User
         # Loop through RecipeCard
         #Find cards for this user
         #Gather recipes on those cards
-
-        user_recipecards = RecipeCard.all.select do |recipecard|
-            recipecard.user == self
-        end
-        user_recipecards.map do |recipecard|
+        self.recipe_cards.map do |recipecard|
             recipecard.recipe
         end
     end
@@ -49,5 +45,38 @@ class User
     def add_recipe_card(recipe, date, rating)
         RecipeCard.new(self, recipe, date, rating)
     end
+
+#     - `User#top_three_recipes`
+# should return the top three highest rated 
+#recipes for this user.
+
+def recipe_cards
+    user_recipecards = RecipeCard.all.select do |recipecard|
+        recipecard.user == self
+    end
+end
+
+
+def top_three_recipes
+#access recipes method from users 
+#which will give us the array of all the recipes
+#sort through that array using max_by method
+self.recipe_cards.max_by(3) do |recipecard|
+    recipecard.rating
+end
+recipe_cards.map do |recipecard|
+    recipecard.recipe
+end
+end
+
+#User#most_recent_recipe`
+# should return the recipe most recently added 
+# to the user's cookbook.
+
+def most_recent_recipe
+    self.recipe_cards.max_by {|recipecard| recipecard.date}
+end
+
+
 
 end

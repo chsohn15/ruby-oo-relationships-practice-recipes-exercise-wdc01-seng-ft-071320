@@ -59,6 +59,7 @@ class Recipe
             ingredient.allergen? == true
         end
     end
+    
     # `Recipe.most_popular`
     # should return the recipe instance with the highest number of users 
     # (the recipe that has the most recipe cards)

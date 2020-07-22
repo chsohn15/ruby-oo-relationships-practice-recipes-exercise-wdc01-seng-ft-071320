@@ -17,14 +17,13 @@ class Ingredient
     # that the highest number of users are allergic to
 
     def self.most_common_allergen
-            all_allergies = Allergy.all.max_by do |allergy|
-                allergy 
-            end
-            # all_allergies.max_by do |allergy|
-            #     binding.pry
-            #     allergy.count
-            #end
+            self.all.max_by do |ingredient|
+            Allergy.all.select do |allergy|
+                allergy.ingredient == ingredient
+            end.count
+        end
     end
+
 
     def allergen?
         #Figure out if ingredient is an allergy in the allergy table
